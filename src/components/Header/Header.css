@@ -1,0 +1,19 @@
+.Header {
+  background-color: black;
+  color: white;
+  padding: 0.5rem;
+  height: 2.5rem;
+  text-align: left;
+  z-index: 13;
+  position: fixed;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.Header h1 {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  z-index: 13;
+  display: inline;
+}

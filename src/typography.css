@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'Landnama';
+    src: url('assets/fonts/LandnamaRegular.eot');
+    src: url('assets/fonts/LandnamaRegular.eot') format('embedded-opentype'),
+         url('assets/fonts/LandnamaRegular.woff2') format('woff2'),
+         url('assets/fonts/LandnamaRegular.woff') format('woff'),
+         url('assets/fonts/LandnamaRegular.ttf') format('truetype'),
+         url('assets/fonts/LandnamaRegular.svg#LandnamaRegular') format('svg');
+}
+
+body, html {
+	font-family: 'Landnama';
+}
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1.15;
+}
+
+p, li, div, td {
+	font-size: 1rem;
+	line-height: 1.3;
+}

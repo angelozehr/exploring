@@ -1,0 +1,11 @@
+.LocationMap {
+	
+}
+.Location-image img {
+	max-width: 100%;
+}
+.Location-description p {
+	text-align: center;
+	padding: 0.5rem 1rem;
+	line-height: 1.4;
+}

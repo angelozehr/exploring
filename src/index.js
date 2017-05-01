@@ -16,7 +16,7 @@ import 'normalize.css'
 import './typography.css'
 import './index.css'
 
-addLocaleData([...en, ...de]);
+addLocaleData([...en, ...de])
 
 const possibleLanguage = (navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage
 const stripRegionCode = possibleLanguage.toLowerCase().split(/[_-]+/)[0]
@@ -29,7 +29,7 @@ if (!window.intl) {
 	  'intl/locale-data/jsonp/en.js',
 	  'intl/locale-data/jsonp/de.js'
 	], (require) => {
-	  require('intl');
+	  require('intl')
 	  require('intl/locale-data/jsonp/en.js')
 	  require('intl/locale-data/jsonp/de.js')
 
@@ -38,13 +38,13 @@ if (!window.intl) {
         <App />
       </IntlProvider>,
       document.getElementById('root')
-    );
-  });
+    )
+  })
 } else {
   render(
     <IntlProvider locale={language} messages={messages}>
       <App />
     </IntlProvider>,
     document.getElementById('root')
-  );
+  )
 }

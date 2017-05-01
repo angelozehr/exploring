@@ -1,7 +1,7 @@
 .Header {
   background-color: black;
   color: white;
-  padding: 0.5rem;
+  padding: 0.5rem 0.6rem 0.3rem 0.8rem;
   height: 2.5rem;
   text-align: left;
   z-index: 13;
@@ -13,7 +13,7 @@
 
 .Header h1 {
   font-size: 1rem;
-  line-height: 1.5rem;
+  line-height: 1.7rem;
   z-index: 13;
   display: inline;
 }

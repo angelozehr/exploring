@@ -12,11 +12,15 @@ import './Navigation.css'
 class Navigation extends PureComponent {
 
   render() {
+    let view = this.context.router.route.match.params.view === 'location'
+    ? 'list'
+    : this.context.router.route.match.params.view
+    
     return (
       <nav className={classnames('Navigation', {show: this.props.show})}>
         <ul>
           {this.props.options.map( (entry, index) => (
-            <Link to={`/list/${entry}`} key={`nav-${index}`} className='Navigation-link'>
+            <Link to={`/${view}/${entry}`} key={`nav-${index}`} className='Navigation-link'>
               <li>
                 <FormattedMessage id={`filter.${entry}`} />
               </li>
@@ -26,6 +30,10 @@ class Navigation extends PureComponent {
       </nav>
     )
   }
+}
+
+Navigation.contextTypes = {
+  router: PropTypes.object
 }
 
 Navigation.defaultProps = {

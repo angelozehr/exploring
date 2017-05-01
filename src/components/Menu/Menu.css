@@ -1,10 +1,10 @@
 .Menu {
   float: right;
-  padding: 5px;
+  padding: 7px;
 }
 
 .menu__icon {
-  width: 1.25rem;
+  width: 1.1rem;
   height: 1.25rem;
   position: relative;
   cursor: pointer;

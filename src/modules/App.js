@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 
 /* libraries */
-import { Redirect, Switch, Route } from 'react-router-dom'
+import { Redirect, Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 /* components */
@@ -84,11 +84,9 @@ class App extends PureComponent {
         <Header options={this.availableFilters} title={headerTitle} />
         { this.state.filteredLocations ? (
           <main>
-            <Switch>
-              <Route exact path='/list/:filter?' render={matchProps => <List locations={this.state.filteredLocations} {...matchProps} />} />
-              <Route exact path='/map/:filter?' render={matchProps => <LocationMap locations={this.state.filteredLocations} {...matchProps} />} />
-              <Route path='/location/:slug' render={matchProps => <Location loc={this.state.filteredLocations[0]} {...matchProps} />} />
-            </Switch>
+            <Route exact path='/list/:filter?' render={matchProps => <List locations={this.state.filteredLocations} {...matchProps} />} />
+            <Route exact path='/map/:filter?' render={matchProps => <LocationMap locations={this.state.filteredLocations} {...matchProps} />} />
+            <Route exact path='/location/:slug' render={matchProps => <Location loc={this.state.filteredLocations[0]} {...matchProps} />} />
           </main>
         ) : (
           <Redirect to='/list/all' />

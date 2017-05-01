@@ -2,104 +2,113 @@ import React, { PureComponent } from 'react'
 
 /* libraries */
 import PropTypes from 'prop-types'
+import MapboxGL from 'mapbox-gl'
 import { Link } from 'react-router-dom'
-import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps'
-import withScriptjs from 'react-google-maps/lib/async/withScriptjs'
 
 /* resources */
 import markerIcon from '../../assets/icons/marker.svg'
 import listIcon from '../../assets/icons/list.svg'
 
 /* styles */
+import 'mapbox-gl/dist/mapbox-gl.css'
 import './LocationMap.css'
-
-const AsyncGettingStartedExampleGoogleMap = withScriptjs(
-  withGoogleMap(props => (
-    <GoogleMap
-      defaultZoom={17}
-      defaultCenter={{ lat: 47.4259451, lng: 9.3728741 }}
-      onClick={() => true}
-    >
-      {props.markers.map((marker, index) => (
-        <Marker
-          key={`marker-${index}`}
-          position={{ lat: marker.lat, lng: marker.long }}
-          onClick={() => props.onMarkerClick(marker)}
-          icon={markerIcon}
-        >
-          {marker.showInfo && (
-            <InfoWindow onCloseClick={() => props.onMarkerClose(marker)}>
-              <div>
-                <a onClick={() => props.history.push(`/location/${marker.slug}`)}>{marker.name}</a>
-              </div>
-            </InfoWindow>
-          )}
-        </Marker>
-      ))}
-    </GoogleMap>
-  ))
-)
 
 class LocationMap extends PureComponent {
 
+  static childContextTypes = {
+    map: PropTypes.object
+  }
+
   constructor(props) {
     super(props)
+
     this.state = {
-      markers: this.props.locations
+      isInitialized: false
     }
-    this.handleMarkerClick = this.handleMarkerClick.bind(this);
-    this.handleMarkerClose = this.handleMarkerClose.bind(this);
+
+    this.initMap = this.initMap.bind(this)
+    this.addGeoJsonLayer = this.addGeoJsonLayer.bind(this);
   }
 
-  handleMarkerClick(targetMarker) {
-    this.setState({
-      markers: this.state.markers.map(marker => {
-        if (marker === targetMarker) {
-          return {
-            ...marker,
-            showInfo: true,
-          };
-        }
-        return marker;
-      }),
+  componentDidMount() {
+    this.initMap()
+  }
+
+  componentWillReceiveProps() {
+    this.addGeoJsonLayer()
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps !== this.props) {
+      this.addGeoJsonLayer()
+    }
+  }
+
+  initMap() {
+    if (!this.mapContainer || this.map) {
+      return false
+    }
+
+    MapboxGL.accessToken = 'pk.eyJ1IjoiYW5nZWxvemVociIsImEiOiJjaWhhZm1raG4wMDVydjhrbG5vZjB1ZnZmIn0.5JpOEiwxrrLzM0NjymAfTQ'
+
+    this.map = new MapboxGL.Map({
+      container: this.mapContainer,
+      style: 'mapbox://styles/angelozehr/cj09uj68600b12smzwwt078qx',
+      zoom: 14,
+      center: [ 9.3728741, 47.4259451 ]
+    })
+
+    this.map.on('load', this.addGeoJsonLayer);
+
+    return true
+  }
+
+  addGeoJsonLayer() {
+
+    if( this.state.isInitialized ) {
+      this.state.markers.map((marker, index) => {
+        marker._element.remove()
+        return true
+      })
+    }
+
+    let markers = this.state.markers || []
+
+    this.props.locations.map((loc, index) => {
+
+      var popupContent = window.document.createElement('h2')
+      popupContent.innerHTML = loc.name
+      popupContent.onclick = () => this.props.history.push(`/location/${loc.slug}`)
+
+      var popup = new MapboxGL.Popup()
+        .setLngLat([loc.long, loc.lat])
+        .setDOMContent(popupContent)
+
+      var el = document.createElement('div')
+      el.className = 'marker'
+      el.style.backgroundImage = `url(${markerIcon})`
+      el.style.width = '17px'
+      el.style.height = '27px'
+
+      var marker = new MapboxGL.Marker(el)
+        .setLngLat([loc.long, loc.lat])
+        .setPopup(popup)
+        .addTo(this.map);
+
+      markers.push(marker)
+      return true
+    })
+
+    this.setState({ 
+      isInitialized: true,
+      markers: markers
     });
   }
 
-  handleMarkerClose(targetMarker) {
-    this.setState({
-      markers: this.state.markers.map(marker => {
-        if (marker === targetMarker) {
-          return {
-            ...marker,
-            showInfo: false,
-          };
-        }
-        return marker;
-      }),
-    });
-  }
-
-  render () {
-    console.log('[LOG]: LocationMap renders...')
-
+  render() {
     return (
-      <div className='LocationMap' style={{height: window.innerHeight}}>
-        <AsyncGettingStartedExampleGoogleMap
-          googleMapURL='https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyC8XhsU5D8coph9BYW4ogmgy3BHE6nJT1c'
-          loadingElement={
-            <div style={{ height: `100%` }} />
-          }
-          containerElement={
-            <div style={{ height: `100%` }} />
-          }
-          mapElement={
-            <div style={{ height: `100%` }} />
-          }
-          markers={this.state.markers}
-          history={this.props.history}
-          onMarkerClick={this.handleMarkerClick}
-          onMarkerClose={this.handleMarkerClose}
-        />
+    	<div className='LocationMap' style={{height: window.innerHeight}}>
+        <div className='map-gl' ref={(ref) => { this.mapContainer = ref }} />
         <nav className='nav-view'>
           <img src={listIcon} alt='' />
           <Link to={`/list/${this.props.match.params.filter}`}>
@@ -114,9 +123,5 @@ class LocationMap extends PureComponent {
 LocationMap.contextTypes = {
   intl: PropTypes.object
 };
-
-LocationMap.propTypes = {
-  locations: PropTypes.array.isRequired
-}
 
 export default LocationMap

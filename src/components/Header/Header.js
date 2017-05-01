@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 
 /* libraries */
 import PropTypes from 'prop-types'
-import { FormattedMessage } from 'react-intl'
 
 /* components */
 import Menu from '../Menu/Menu'

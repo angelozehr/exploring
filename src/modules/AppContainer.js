@@ -12,7 +12,7 @@ class AppContainer extends PureComponent {
     console.log('[LOG]: AppContainer renders...')
 
     return (
-		  <Router>        
+      <Router>        
         <Route path="/:view?/:filter?" render={matchProps => <App {...this.props} {...matchProps} />} />
       </Router>
     )

@@ -6,13 +6,15 @@
     "babel-plugin-react-intl": "^2.3.1",
     "classnames": "^2.2.5",
     "intl": "^1.2.5",
+    "mapbox-gl": "^0.36.0",
     "normalize.css": "^6.0.0",
     "react": "^15.5.4",
     "react-cookie": "^2.0.6",
     "react-dom": "^15.5.4",
     "react-google-maps": "^6.3.0",
     "react-intl": "^2.2.3",
-    "react-router-dom": "^4.1.1"
+    "react-router-dom": "^4.1.1",
+    "react-router-scroll": "ytase/react-router-scroll#build"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"

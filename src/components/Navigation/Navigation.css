@@ -23,7 +23,8 @@
 	transform: translateY(-50%);
 }
 .Navigation ul li {
-	padding: 1.5rem;
+	font-size: 1.5rem;
+	padding: 0.7rem;
 }
 .Navigation-link {
 	color: inherit;

@@ -25,14 +25,15 @@
 
 .nav-view {
   position: fixed;
-  bottom: 15px;
+  bottom: 25px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 0.5rem;
+  padding: 0.6rem;
   background-color: black;
   color: white;
   box-sizing: border-box;
-  width: 250px;
+  width: 255px;
+  text-align: center;
 }
 .nav-view a {
   color: inherit;

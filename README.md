@@ -8,9 +8,6 @@ Feel free to copy or contribute (e.g. for other cities)
 - change structure to redux
 - add transitiongroups to components
 - add bratwurst and loading page
-- add marker for current user position
-- add react-cookie and add favourites
-- have a look at chrome back keep scroll position
 - heute.sg integration
 - analytics
 - start screen

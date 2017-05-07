@@ -7,4 +7,9 @@ gsheets:
 	$(SHEET_DL) --title Locations --out $(GSHEET_DEST)/locations.json
 
 deploy:
-	lftp -c " set ftp:list-options -a; open ftp://web204:2qT5qJuk@login-73h.hoststar.ch; lcd build; cd stadt; mirror --reverse --verbose --exclude-glob .*"
+	lftp -c "																										\
+		set ftp:list-options -a;																	\
+		open ftp://web204:2qT5qJuk@login-73.hoststar.ch;		      \
+		lcd build;																								\
+		cd stadt;																		              \
+		mirror --reverse --verbose --exclude-glob .*"

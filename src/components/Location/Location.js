@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 
 /* components */
 import LocationMap from '../LocationMap/LocationMap'
+import Bookmark from '../Bookmark/Bookmark'
 
 /* styles */
 import './Location.css'
@@ -26,6 +27,7 @@ class Location extends PureComponent {
           {this.props.loc.image !== null &&
             <img src={`${process.env.PUBLIC_URL}/images/${this.props.loc.image}`} alt='' />
           }
+          <Bookmark locationId={this.props.loc.id} />
           <article className='Location-description'>
             <p>{this.props.loc.de}</p>
             <aside>{this.props.loc.address}</aside>

@@ -24,12 +24,12 @@ class List extends PureComponent {
 
   handleTouchStart (index) {
     console.log('[LOG]: List touched...')
-    this.setState({touched: index})
+    // this.setState({touched: index})
   }
 
   handleTouchEnd () {
     console.log('[LOG]: List touch ended...')
-    this.setState({touched: -1})
+    // this.setState({touched: -1})
   }
 
   render () {

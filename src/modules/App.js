@@ -65,6 +65,10 @@ class App extends PureComponent {
   getFilteredLocations (filter = this.state.filter) {
     if (filter) {
       if(filter === 'all') return this.locations
+      if(filter === 'saved') {
+        const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || []
+        return this.locations.filter(location => bookmarks.indexOf(location.id) >= 0)
+      }
 
       return this.availableFilters.indexOf(filter) < 0
       ? this.locations.filter(location => location.slug === filter)

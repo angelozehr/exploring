@@ -27,7 +27,10 @@ class LocationMap extends PureComponent {
     }
 
     this.initMap = this.initMap.bind(this)
-    this.addGeoJsonLayer = this.addGeoJsonLayer.bind(this);
+    this.addGeoJsonLayer = this.addGeoJsonLayer.bind(this)
+    this.controlGeoLocation = this.controlGeoLocation.bind(this)
+    this.positionUser = this.positionUser.bind(this)
+    this.isInLocation = this.props.match === undefined
   }
 
   componentDidMount() {
@@ -54,11 +57,12 @@ class LocationMap extends PureComponent {
     this.map = new MapboxGL.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/angelozehr/cj09uj68600b12smzwwt078qx',
+      logoPosition: 'top-left',
       zoom: 14,
-      center: [ 9.3728741, 47.4259451 ]
+      center: this.props.center
     })
 
-    this.map.on('load', this.addGeoJsonLayer);
+    this.map.on('load', this.addGeoJsonLayer)
 
     return true
   }
@@ -76,45 +80,82 @@ class LocationMap extends PureComponent {
 
     this.props.locations.map((loc, index) => {
 
-      var popupContent = window.document.createElement('h2')
+      const popupContent = window.document.createElement('h2')
       popupContent.innerHTML = loc.name
       popupContent.onclick = () => this.props.history.push(`/location/${loc.slug}`)
 
-      var popup = new MapboxGL.Popup()
+      const popup = new MapboxGL.Popup()
         .setLngLat([loc.long, loc.lat])
         .setDOMContent(popupContent)
 
-      var el = document.createElement('div')
+      const el = document.createElement('div')
       el.className = 'marker'
-      el.style.backgroundImage = `url(${markerIcon})`
+      el.innerHTML = `<img src='${markerIcon}' alt='' />`
       el.style.width = '17px'
       el.style.height = '27px'
 
-      var marker = new MapboxGL.Marker(el)
+      const marker = new MapboxGL.Marker(el)
         .setLngLat([loc.long, loc.lat])
         .setPopup(popup)
-        .addTo(this.map);
+        .addTo(this.map)
 
       markers.push(marker)
       return true
     })
 
+    this.controlGeoLocation()
+
     this.setState({ 
       isInitialized: true,
       markers: markers
-    });
+    })
+  }
+
+  controlGeoLocation() {
+    if( !this.hasOwnProperty('geolocate')) {
+      this.geolocate = new MapboxGL.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true
+        }
+      })
+      this.map.addControl(this.geolocate, 'top-left')
+      this.geolocate.on('geolocate', this.positionUser)
+    }
+  }
+
+  positionUser(data) {
+    if( !this.state.hasOwnProperty('user')) {
+      const el = document.createElement('div')
+      el.className = 'marker'
+      const pin = document.createElement('div')
+      pin.className = 'LocationMap-user-pin'
+      const effect = document.createElement('div')
+      effect.className = 'LocationMap-user-pin-effect'
+      el.appendChild(pin)
+      el.appendChild(effect)
+
+      const user = new MapboxGL.Marker(el)
+        .setLngLat([data.coords.longitude, data.coords.latitude])
+        .addTo(this.map)
+
+      this.setState({ user: user })
+    } else {
+      this.state.user.setLngLat([data.coords.longitude, data.coords.latitude])
+    }
   }
 
   render() {
     return (
-    	<div className='LocationMap' style={{height: window.innerHeight}}>
+    	<div className='LocationMap' style={{height: !this.isInLocation ? window.innerHeight : '100%'}}>
         <div className='map-gl' ref={(ref) => { this.mapContainer = ref }} />
-        <nav className='nav-view'>
-          <img src={listIcon} alt='' />
-          <Link to={`/list/${this.props.match.params.filter}`}>
-            {this.context.intl.messages['view.list']}
-          </Link>
-        </nav>
+        {!this.isInLocation &&
+          <nav className='nav-view'>
+            <img src={listIcon} alt='' />
+            <Link to={`/list/${this.props.match.params.filter}`}>
+              {this.context.intl.messages['view.list']}
+            </Link>
+          </nav>
+        }
       </div>
     )
   }
@@ -122,6 +163,11 @@ class LocationMap extends PureComponent {
 
 LocationMap.contextTypes = {
   intl: PropTypes.object
-};
+}
+
+LocationMap.propTypes = {
+  locations: PropTypes.arrayOf(PropTypes.object).isRequired,
+  center: PropTypes.array.isRequired
+}
 
 export default LocationMap

@@ -1,10 +1,12 @@
 {
   "name": "exploring",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "homepage": "http://exploring.sg/",
   "dependencies": {
     "babel-plugin-react-intl": "^2.3.1",
     "classnames": "^2.2.5",
+    "gsheets": "^2.0.0",
     "intl": "^1.2.5",
     "mapbox-gl": "^0.36.0",
     "normalize.css": "^6.0.0",

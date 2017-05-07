@@ -12,7 +12,7 @@
 	transition: all 0.5s;
 	transition-delay: 0.5s;
 }
-.List-location--touch {
+.List-location--touch, .List-location:hover {
 	filter: grayscale(0%);
 }
 .List-location-overlay {
@@ -22,7 +22,7 @@
     height: 100%;
 }
 .List-location--touch .List-location-overlay {
-    background-color: rgba(0,0,0,0);
+  background-color: rgba(0,0,0,0);
 	transition: all 0.5s;
 	transition-delay: 0.5s;
 }
@@ -34,4 +34,19 @@
 	top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
+}
+
+@media screen and (min-width: 768px) {
+  .List-location {
+    width: 50%;
+    float: left;
+    padding-bottom: 33%;
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  .List-location {
+    width: 33.33333%;
+    padding-bottom: 20%;
+  }
 }

@@ -3,3 +3,19 @@ body, html {
   padding: 0;
   font-size: 120%;
 }
+
+a {
+  color: inherit;
+}
+
+@media screen and (min-width: 768px) {
+  body, html {
+    font-size: 130%;
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  body, html {
+    font-size: 140%;
+  }
+}

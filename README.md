@@ -11,3 +11,7 @@ Feel free to copy or contribute (e.g. for other cities)
 - add marker for current user position
 - add react-cookie and add favourites
 - have a look at chrome back keep scroll position
+- heute.sg integration
+- analytics
+- start screen
+- search view (nav slides up and search is on top, impressum at bottom)

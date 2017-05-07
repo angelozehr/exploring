@@ -20,13 +20,13 @@ import './App.css'
 class App extends PureComponent {
   constructor (props) {
     super(props)
-    this.locations = locations
+    this.locations = locations.data
     this.state = {
       view: 'list',
       filter: 'all',
-      filteredLocations: locations
+      filteredLocations: this.locations
     }
-    this.availableFilters = ['all' ,'eatdrink' ,'party' ,'culture' ,'places' ,'saved']
+    this.availableFilters = ['all' ,'eatdrink' ,'party' ,'places' ,'shopping' ,'saved']
     this.getStateFromURL = this.getStateFromURL.bind(this)
     this.getFilteredLocations = this.getFilteredLocations.bind(this)
   }
@@ -85,7 +85,7 @@ class App extends PureComponent {
         { this.state.filteredLocations ? (
           <main>
             <Route exact path='/list/:filter?' render={matchProps => <List locations={this.state.filteredLocations} {...matchProps} />} />
-            <Route exact path='/map/:filter?' render={matchProps => <LocationMap locations={this.state.filteredLocations} {...matchProps} />} />
+            <Route exact path='/map/:filter?' render={matchProps => <LocationMap locations={this.state.filteredLocations} center={[9.3728741, 47.4259451]} {...matchProps} />} />
             <Route exact path='/location/:slug' render={matchProps => <Location loc={this.state.filteredLocations[0]} {...matchProps} />} />
           </main>
         ) : (

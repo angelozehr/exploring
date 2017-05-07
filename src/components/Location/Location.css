@@ -1,5 +1,13 @@
-.LocationMap {
-	
+.Location {
+}
+.Location-hours {
+  padding-left: 0px;
+  list-style: none;
+  margin: 0 auto;
+}
+.Location-hours li, .Location aside {
+  font-size: 0.7rem;
+  line-height: 1.5;
 }
 .Location-image img {
 	max-width: 100%;
@@ -8,4 +16,27 @@
 	text-align: center;
 	padding: 0.5rem 1rem;
 	line-height: 1.4;
+}
+.Location-Map {
+  width: 100%;
+  height: 300px;
+  padding-top: 1rem;
+}
+.Location-Map .LocationMap {
+  padding-top: 0rem;
+  position: relative;
+}
+
+@media screen and (min-width: 768px) {
+  .Location {
+    padding-top: 2.5rem;
+    max-width: 660px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  .Location {
+    max-width: 960px;
+  }
 }

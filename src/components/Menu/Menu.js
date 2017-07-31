@@ -4,47 +4,37 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-/* components */
-import Navigation from '../Navigation/Navigation'
-
 /* styles */
 import './Menu.css'
 
 class Menu extends PureComponent {
 
-  constructor () {
-    super()
-    this.state = {
-      showMenu: false
-    }
-    this.handleClick = this.handleClick.bind(this)
-  }
-
-  handleClick () {
-    this.setState({
-      showMenu: !this.state.showMenu
-    })
-  }
-
   render() {
     console.log('[LOG]: Menu renders...')
 
     return (
-      <div className={classnames('Menu', {'menu_state_open': this.state.showMenu})} onClick={this.handleClick}>
-        <div className='menu__icon'>
+      <div className={classnames('Menu', {'menu_state_open': (this.props.showMenu || this.props.searchOpen)})}>
+        <div className='menu__icon' onClick={this.props.handleClick}>
   	      <span></span>
   	      <span></span>
   	      <span></span>
   	      <span></span>
   	    </div>
-        <Navigation show={this.state.showMenu} options={this.props.options} />
+        {this.props.children}
     </div>
     )
   }
 }
 
+Menu.defaultProps = {
+  showMenu: false,
+  searchOpen: false
+}
+
 Menu.propTypes = {
-  options: PropTypes.array.isRequired
+  showMenu: PropTypes.bool,
+  searchOpen: PropTypes.bool,
+  handleClick: PropTypes.func.isRequired
 }
 
 export default Menu

@@ -102,7 +102,7 @@ class LocationMap extends PureComponent {
         />
         <nav className='nav-view'>
           <img src={listIcon} alt='' />
-          <Link to={`/list/${this.props.match.params.filter}`}>
+          <Link to={`/list/${this.props.match.params.category}`}>
             {this.context.intl.messages['view.list']}
           </Link>
         </nav>

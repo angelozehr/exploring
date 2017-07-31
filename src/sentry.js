@@ -1,0 +1,1 @@
+Raven.config('https://a9bde506cb944b6999767942bba9704a@sentry.io/193174').install()

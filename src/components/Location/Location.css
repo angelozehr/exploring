@@ -1,5 +1,19 @@
 .Location {
 }
+.Location-is-open {
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  margin: 10px auto;
+  background-color: #AF001D;
+}
+.Location-is-open:after {
+  content: '.';
+  visibility: hidden;
+}
+.Location-is-open__true {
+  background-color: #168C5A;
+}
 .Location-hours {
   padding-left: 0px;
   list-style: none;
@@ -12,9 +26,14 @@
 .Location-image img {
 	max-width: 100%;
 }
+.Location-image__saved img {
+  border: solid #E0C348;
+  border-width: 2px 3px;
+  box-sizing: border-box;
+}
 .Location-description p {
 	text-align: center;
-	padding: 0.5rem 1rem;
+	padding: 0.75rem 1rem;
 	line-height: 1.4;
 }
 .Location-Map {

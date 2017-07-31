@@ -1,0 +1,35 @@
+.Oops {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  background: black;
+  text-align: center;
+  z-index: 9;
+}
+
+.Oops .error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 50%;
+}
+
+.Oops .error-title {
+  font-size: 2rem;
+  color: white;
+}
+
+.Oops .error-message {
+  font-size: 1rem;
+  color: white;
+}
+
+.Oops .error-icon {
+  width: 100%;
+  height: auto;
+}

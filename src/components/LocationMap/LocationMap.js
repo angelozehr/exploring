@@ -5,6 +5,9 @@ import PropTypes from 'prop-types'
 import MapboxGL from 'mapbox-gl'
 import { Link } from 'react-router-dom'
 
+/* components */
+import Oops from '../Oops/Oops'
+
 /* resources */
 import markerIcon from '../../assets/icons/marker.svg'
 import listIcon from '../../assets/icons/list.svg'
@@ -30,6 +33,7 @@ class LocationMap extends PureComponent {
     this.addGeoJsonLayer = this.addGeoJsonLayer.bind(this)
     this.controlGeoLocation = this.controlGeoLocation.bind(this)
     this.positionUser = this.positionUser.bind(this)
+    this.flyToMarker = this.flyToMarker.bind(this)
     this.isInLocation = this.props.match === undefined
   }
 
@@ -82,7 +86,7 @@ class LocationMap extends PureComponent {
 
       const popupContent = window.document.createElement('h2')
       popupContent.innerHTML = loc.name
-      popupContent.onclick = () => this.props.history.push(`/location/${loc.slug}`)
+      popupContent.onclick = () => this.props.openLocation(loc.slug)
 
       const popup = new MapboxGL.Popup()
         .setLngLat([loc.long, loc.lat])
@@ -93,11 +97,16 @@ class LocationMap extends PureComponent {
       el.innerHTML = `<img src='${markerIcon}' alt='' />`
       el.style.width = '17px'
       el.style.height = '27px'
+      el.onclick = () => this.flyToMarker([loc.long, loc.lat])
 
       const marker = new MapboxGL.Marker(el)
         .setLngLat([loc.long, loc.lat])
         .setPopup(popup)
         .addTo(this.map)
+        
+      if(this.props.locations.length === 1) {
+        marker.togglePopup()
+      }
 
       markers.push(marker)
       return true
@@ -123,6 +132,10 @@ class LocationMap extends PureComponent {
     }
   }
 
+  flyToMarker(longLat) {
+    if (longLat) this.map.flyTo({center: longLat});
+  }
+
   positionUser(data) {
     if( !this.state.hasOwnProperty('user')) {
       const el = document.createElement('div')
@@ -142,32 +155,43 @@ class LocationMap extends PureComponent {
     } else {
       this.state.user.setLngLat([data.coords.longitude, data.coords.latitude])
     }
+    this.props.positionUser([data.coords.longitude, data.coords.latitude])
   }
 
   render() {
     return (
     	<div className='LocationMap' style={{height: !this.isInLocation ? window.innerHeight : '100%'}}>
         <div className='map-gl' ref={(ref) => { this.mapContainer = ref }} />
-        {!this.isInLocation &&
+        {this.props.locations.length === 0 ? (
+          <Oops message={this.context.intl.messages['no.results']} />
+        ) : !this.isInLocation && (
           <nav className='nav-view'>
             <img src={listIcon} alt='' />
-            <Link to={`/list/${this.props.match.params.filter}`}>
+            <Link to={`/list/${this.props.match.params.category}`} onClick={() => this.props.handleNavSwitchClick('list')}>
               {this.context.intl.messages['view.list']}
             </Link>
           </nav>
-        }
+        )}
       </div>
     )
   }
 }
 
 LocationMap.contextTypes = {
-  intl: PropTypes.object
+  intl: PropTypes.object.isRequired
+}
+
+LocationMap.defaultProps = {
+  handleNavSwitchClick: () => true,
+  openLocation: () => true
 }
 
 LocationMap.propTypes = {
   locations: PropTypes.arrayOf(PropTypes.object).isRequired,
-  center: PropTypes.array.isRequired
+  center: PropTypes.array.isRequired,
+  positionUser: PropTypes.func.isRequired,
+  handleNavSwitchClick: PropTypes.func,
+  openLocation: PropTypes.func
 }
 
 export default LocationMap

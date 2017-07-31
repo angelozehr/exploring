@@ -3,38 +3,28 @@ import React, { PureComponent } from 'react'
 /* libraries */
 import PropTypes from 'prop-types'
 
-/* components */
-import Menu from '../Menu/Menu'
-
 /* styles */
 import './Header.css';
 
 class Header extends PureComponent {
-
-  constructor (props) {
-    super(props)
-    this.state = {}
-  }
-
   render () {
     return (
       <div className='Header'>
         <h1>
           {this.props.title}
         </h1>
-        <Menu options={this.props.options} />
+        {this.props.children}
       </div>
     )
   }
 }
 
 Header.defaultProps = {
-  title: 'Exploring'
+  title: 'St.Gallen'
 }
 
 Header.propTypes = {
-  title: PropTypes.string,
-  options: PropTypes.array.isRequired
+  title: PropTypes.string
 }
 
 export default Header

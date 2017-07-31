@@ -11,5 +11,5 @@ deploy:
 		set ftp:list-options -a;																	\
 		open ftp://web204:2qT5qJuk@login-73.hoststar.ch;		      \
 		lcd build;																								\
-		cd stadt;																		              \
+		cd /stadt;																		              \
 		mirror --reverse --verbose --exclude-glob .*"

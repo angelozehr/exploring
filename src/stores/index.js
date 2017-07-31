@@ -11,36 +11,31 @@ import reducer from '../reducers'
 import { loadState, saveState } from '../assets/utils/localstorage.js'
 
 /* localisation */
+import ch from '../assets/locales/ch.json'
 import de from '../assets/locales/de.json'
 import en from '../assets/locales/en.json'
 
+/* read bookmarks from localstorage */
+const persistedState = loadState() || []
+
+/* define locale */
 const possibleLanguage = (navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage
 const stripRegionCode = possibleLanguage.toLowerCase().split(/[_-]+/)[0]
-const locale = stripRegionCode || possibleLanguage || 'en'
-const messages = { 'en': en, 'de': de }
+const locale = persistedState.userLocale || stripRegionCode || possibleLanguage || 'en'
+const messages = { 'en': en, 'de': de, 'ch': ch }
 
 const initialIntlState = {
   intl: {
-    defaultLocale: locale,
+    defaultLocale: 'de',
     locale: locale,
     messages: messages[locale]
   }
 }
 
-/* read bookmarks from localstorage */
-const persistedState = loadState()
-const bookmarks = persistedState !== typeof undefined 
-? persistedState
-: []
-
-const initialAppState = {
-  bookmarks: bookmarks
-}
-
 /* combine the two */
 const initialState = {
   ...initialIntlState,
-  ...initialAppState
+  bookmarks: persistedState.bookmarks
 }
 
 /* add thunk and logger */
@@ -58,9 +53,9 @@ const store = createStore(
 
 /* persist bookmarks in localstorage */
 store.subscribe(throttle(() => {
-  console.dir(store.getState())
   saveState({
-    bookmarks: store.getState().bookmarks.bookmarks
+    bookmarks: store.getState().bookmarks,
+    userLocale: store.getState().intl.locale
   })
 }, 1000))
 

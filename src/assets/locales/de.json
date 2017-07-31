@@ -1,6 +1,9 @@
 {
-  "AppName": "Exploring St.Gallen",
-  "category.all": "Alle",
+  "AppName.short": "Wohin?",
+  "AppName": "Wohin St.Gallen?",
+  "description": "Finde alle coolen Orte der Stadt St.Gallen mit diesem Smartphone-Stadtführer.",
+  "Impressum": "Impressum",
+  "category.all": "Alle Orte",
   "category.eatdrink": "Essen & Trinken",
   "category.party": "Ausgehen",
   "category.places": "Kultur & Erholung",
@@ -9,5 +12,7 @@
   "view.map": "Auf der Karte ansehen",
   "view.list": "Als Liste ansehen",
   "search": "Suchen...",
-  "no.results": "Kein Treffer, versuch's nochmal."
+  "no.results": "Kein Treffer, versuch's nochmal.",
+  "now.open": "Jetzt geöffnet",
+  "now.closed": "Jetzt geöffnet"
 }

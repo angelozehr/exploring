@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
+import Helmet from 'react-helmet'
 
 /* components */
 import Start from '../components/Start/Start'
@@ -15,9 +16,6 @@ import LocationMap from '../components/LocationMap/LocationMap'
 import Location from '../components/Location/Location'
 import Footer from '../components/Footer/Footer'
 import Oops from '../components/Oops/Oops'
-
-/* resources */
-
 
 /* styles */
 import './App.css'
@@ -48,7 +46,12 @@ class App extends PureComponent {
 
   componentWillReceiveProps (nextProps) {
     console.log('[LOG]: App will receive props...')
-    this.writeURL(nextProps)
+    /* if user clicked back button: Read in url */
+    if (this.context.router.history.action === 'POP') {
+      this.readURL(nextProps)
+    } else {
+      this.writeURL(nextProps)
+    }
   }
 
   readURL (props = this.props) {
@@ -224,6 +227,14 @@ class App extends PureComponent {
     return (
       <div className={classnames('App', {'App__noscroll': !this.state.hideStart})}>
         {!this.state.unmountStart && <Start hidden={this.state.hideStart} />}
+        <Helmet>
+          <title>{`${this.context.intl.messages['AppName']} ${this.getTitle()}`}</title>
+          <meta property="og:url" content={window.location.href} />
+          <meta property="og:image" content="http://www.mysite.com/articleimage.jpg" />
+          <meta property="og:site_name" content={this.context.intl.messages['AppName']} />
+          <meta name="description" content={`${this.context.intl.messages['description']}`} />
+          <meta property="og:description" content={`${this.context.intl.messages['description']}`} />
+        </Helmet>
         <Header title={this.getTitle()}>
           <Menu
             searchOpen={searchOpen}
@@ -232,6 +243,7 @@ class App extends PureComponent {
               view={view}
               show={showMenu}
               handleSearchIconClick={() => { userTyping(true) }}
+              handleLangSwitchClick={this.props.updateIntl}
               searchOpen={searchOpen}
               search={search}
               query={query}
@@ -268,6 +280,7 @@ class App extends PureComponent {
                   positionUser={positionUser}
                   handleNavSwitchClick={setView}
                   openLocation={openLocation}
+                  bookmarks={bookmarks}
                 />
               }
             />

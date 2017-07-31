@@ -39,3 +39,11 @@ export const getParams = string => {
   if (typeof string !== 'string') return []
   return string.split('/').filter(entry => entry.length > 0)
 }
+
+export const sequence = (max, step = 1) => {
+  var array = [];
+  for (var i = 1; i <= max; i = i + step) {
+     array.push(i);
+  }
+  return array
+}

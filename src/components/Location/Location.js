@@ -4,13 +4,14 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import ReactSwipe from 'react-swipe'
+import Helmet from 'react-helmet'
 
 /* components */
 import LocationMap from '../LocationMap/LocationMap'
 import Bookmark from '../Bookmark/Bookmark'
 
 /* resources */
-import {isOpen} from '../../assets/utils'
+import {isOpen, sequence} from '../../assets/utils'
 
 /* styles */
 import './Location.css'
@@ -33,10 +34,15 @@ class Location extends PureComponent {
       type,
       address,
       phone,
+      photos,
       website,
       long,
       lat
     } = singleLocation
+
+    const {
+      messages
+    } = this.context.intl
 
     const openingHours = [
       singleLocation.mo,
@@ -58,10 +64,15 @@ class Location extends PureComponent {
 
     return (
       <div className='Location'>
+        <Helmet>
+          <meta name="description" content={singleLocation[locale]} />
+          <meta property="og:description" content={singleLocation[locale]} />
+          <meta property="og:image" content={`${process.env.PUBLIC_URL}/images/${slug}/1.jpg`} />
+        </Helmet>
       	<div className={classnames('Location-image', {'Location-image__saved': saved})}>
           {image !== null &&
             <ReactSwipe className='Location-image-swipe'>
-              {[1,2,3].map(i =>
+              {sequence(parseInt(photos, 10)).map(i =>
                 <img src={`${process.env.PUBLIC_URL}/images/${slug}/${i}.jpg`} alt='' key={`slide-${i}`} />
               )}
             </ReactSwipe>
@@ -77,7 +88,9 @@ class Location extends PureComponent {
           {type !== 'places' && 
             <div>
               <aside>{address}</aside>
-              <div className={classnames('Location-is-open', {'Location-is-open__true': isOpen(openingHours)})} />
+              <div className='Location-is-open'>
+                {isOpen(openingHours) ? messages['now.open'] : messages['now.closed']}
+              </div>
               <ul className='Location-hours'>
                 {hours.map(line => (
                   <li key={line.replace(/[^\w\s]/gi, '')}>{line}</li>
@@ -108,6 +121,10 @@ class Location extends PureComponent {
       </div>
     )
   }
+}
+
+Location.contextTypes = {
+  intl: PropTypes.object
 }
 
 Location.propTypes = {

@@ -77,3 +77,26 @@
 .Navigation.results {
 	height: 2.5rem;
 }
+.Navigation-small {
+	font-size: 0.8rem;
+	position: absolute;
+}
+.Navigation-small__top {
+	top: 0.75rem;
+}
+.Navigation-small__right {
+	right: 0.75rem;
+}
+.Navigation-small__bottom {
+	bottom: 0.75rem;
+}
+.Navigation-small__left {
+	left: 0.75rem;
+}
+.Navigation-langSwitch-button {
+	background: none;
+	border: none;
+	color: white;
+	font-family: 'Landnama';
+	padding: 0 0.75rem 0 0;
+}

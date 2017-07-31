@@ -10,6 +10,7 @@ import Oops from '../Oops/Oops'
 
 /* resources */
 import markerIcon from '../../assets/icons/marker.svg'
+import savedIcon from '../../assets/icons/marker_gold.svg'
 import listIcon from '../../assets/icons/list.svg'
 
 /* styles */
@@ -92,9 +93,13 @@ class LocationMap extends PureComponent {
         .setLngLat([loc.long, loc.lat])
         .setDOMContent(popupContent)
 
+      const icon = this.props.bookmarks.indexOf(loc.slug) >= 0
+      ? savedIcon
+      : markerIcon
+
       const el = document.createElement('div')
       el.className = 'marker'
-      el.innerHTML = `<img src='${markerIcon}' alt='' />`
+      el.innerHTML = `<img src='${icon}' alt='' />`
       el.style.width = '17px'
       el.style.height = '27px'
       el.onclick = () => this.flyToMarker([loc.long, loc.lat])
@@ -103,7 +108,7 @@ class LocationMap extends PureComponent {
         .setLngLat([loc.long, loc.lat])
         .setPopup(popup)
         .addTo(this.map)
-        
+
       if(this.props.locations.length === 1) {
         marker.togglePopup()
       }
@@ -114,7 +119,7 @@ class LocationMap extends PureComponent {
 
     this.controlGeoLocation()
 
-    this.setState({ 
+    this.setState({
       isInitialized: true,
       markers: markers
     })
@@ -183,7 +188,8 @@ LocationMap.contextTypes = {
 
 LocationMap.defaultProps = {
   handleNavSwitchClick: () => true,
-  openLocation: () => true
+  openLocation: () => true,
+  bookmarks: []
 }
 
 LocationMap.propTypes = {
@@ -191,7 +197,8 @@ LocationMap.propTypes = {
   center: PropTypes.array.isRequired,
   positionUser: PropTypes.func.isRequired,
   handleNavSwitchClick: PropTypes.func,
-  openLocation: PropTypes.func
+  openLocation: PropTypes.func,
+  bookmarks: PropTypes.array
 }
 
 export default LocationMap

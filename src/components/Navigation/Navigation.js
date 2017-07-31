@@ -9,6 +9,9 @@ import { debounce } from 'throttle-debounce';
 
 /* resources */
 import searchIcon from '../../assets/icons/search.svg'
+import ch from '../../assets/locales/ch.json'
+import de from '../../assets/locales/de.json'
+import en from '../../assets/locales/en.json'
 
 /* styles */
 import './Navigation.css'
@@ -21,9 +24,13 @@ class Navigation extends PureComponent {
       query
     } = this.props
 
+    let {
+      messages
+    } = this.context.intl
+
     const placeholder = query !== ''
     ? query
-    : this.context.intl.messages['search']
+    : messages['search']
 
     if (view === 'location') view = 'list'
     
@@ -55,6 +62,32 @@ class Navigation extends PureComponent {
             </li>
           </a>
         </ul>
+        <small className='Navigation-small Navigation-small__top Navigation-small__left'>
+          {messages['AppName.short']}
+        </small>
+        <small className='Navigation-small Navigation-small__bottom Navigation-small__right'>
+          {messages['Impressum']}
+        </small>
+        <small className='Navigation-small Navigation-small__bottom Navigation-small__left'>
+          <button
+            className='Navigation-langSwitch-button'
+            onClick={() => this.props.handleLangSwitchClick({locale: 'de', messages: de})}
+          >
+            DE
+          </button>
+          <button
+            className='Navigation-langSwitch-button'
+            onClick={() => this.props.handleLangSwitchClick({locale: 'en', messages: en})}
+          >
+            EN
+          </button>
+          <button
+            className='Navigation-langSwitch-button'
+            onClick={() => this.props.handleLangSwitchClick({locale: 'ch', messages: ch})}
+          >
+            CH
+          </button>
+        </small>
       </nav>
     )
   }
@@ -76,6 +109,7 @@ Navigation.propTypes = {
   view: PropTypes.string.isRequired,
   show: PropTypes.bool,
   handleSearchIconClick: PropTypes.func.isRequired,
+  handleLangSwitchClick: PropTypes.func.isRequired,
   searchOpen: PropTypes.bool,
   search: PropTypes.func.isRequired,
   query: PropTypes.string,

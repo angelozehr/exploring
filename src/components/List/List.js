@@ -66,19 +66,24 @@ class List extends PureComponent {
             to={`/location/${location.slug}`}
             key={`link-${index}`}
             onClick={() => this.props.handleClick(location.slug)}
-            className={classnames('List-Link', {'List-location__saved': bookmarks.indexOf(location.slug) >= 0})}
+            className='List-Link'
           >
-            <section 
-              className={classnames('List-location', {'List-location__touch': index === this.state.touched})}
+            <section
+              className={classnames('List-location', {'List-location__saved': bookmarks.indexOf(location.slug) >= 0, 'List-location__touch': index === this.state.touched})}
               onTouchStart={() => this.handleTouchStart(index)}
               onTouchEnd={this.handleTouchEnd}
-              style={{backgroundImage: `url(${process.env.PUBLIC_URL}/images/${location.slug}/1.jpg)`}}>
-              <div className='List-location-overlay'>
-                <h3>{location.name}</h3>
-                <aside className='List-location-distance'>
-                  {this.getDistance([parseFloat(location.long), parseFloat(location.lat)])}
-                </aside>
-              </div>
+            >
+              <figure
+                className='List-location-image'
+                style={{backgroundImage: `url(${process.env.PUBLIC_URL}/images/${location.slug}/1.jpg)`}}
+              >
+                <div className='List-location-overlay'>
+                  <h3>{location.name}</h3>
+                  <aside className='List-location-distance'>
+                    {this.getDistance([parseFloat(location.long), parseFloat(location.lat)])}
+                  </aside>
+                </div>
+              </figure>
             </section>
           </Link>
         ))}

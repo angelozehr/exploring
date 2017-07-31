@@ -1,25 +1,11 @@
 .Location {
 }
-.Location-is-open {
-  border-radius: 50%;
-  width: 10px;
-  height: 10px;
-  margin: 10px auto;
-  background-color: #AF001D;
-}
-.Location-is-open:after {
-  content: '.';
-  visibility: hidden;
-}
-.Location-is-open__true {
-  background-color: #168C5A;
-}
 .Location-hours {
   padding-left: 0px;
   list-style: none;
   margin: 0 auto;
 }
-.Location-hours li, .Location aside {
+.Location-hours li, .Location aside, .Location-is-open {
   font-size: 0.7rem;
   line-height: 1.5;
 }

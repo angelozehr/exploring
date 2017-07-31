@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { updateIntl } from 'react-intl-redux'
 
 /* components */
 import App from './App'
@@ -57,7 +58,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators(actions, dispatch)
+  bindActionCreators({...actions, updateIntl}, dispatch)
 )
 
 export default connect(

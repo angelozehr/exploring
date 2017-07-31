@@ -5,6 +5,7 @@ GSHEET_DEST = src/assets/data
 
 gsheets:
 	$(SHEET_DL) --title Locations --out $(GSHEET_DEST)/locations.json
+	$(SHEET_DL) --title Copyright --out $(GSHEET_DEST)/copyright.json
 
 deploy:
 	lftp -c "																										\

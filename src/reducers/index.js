@@ -57,7 +57,9 @@ const appReducer = (state = {
         category: action.category,
         showMenu: false,
         query: '',
-        showRestults: false
+        showRestults: false,
+        searchOpen: false,
+        view: state.view === 'location' ? 'list' : state.view
       }
     case USER_TYPING:
       return {
@@ -91,7 +93,6 @@ const appReducer = (state = {
         view: 'location',
         singleLocation: action.slug,
         query: '',
-        showMenu: false,
         showRestults: false
       }
     case POSITION_USER:

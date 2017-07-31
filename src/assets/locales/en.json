@@ -1,6 +1,9 @@
 {
+  "AppName.short": "Exploring",
   "AppName": "Exploring St.Gallen",
-  "category.all": "All",
+  "description": "Your guide to Saint Gallen – check it out, it's cool. I swear.",
+  "Impressum": "Impressum",
+  "category.all": "All places",
   "category.eatdrink": "Eat & Drink",
   "category.party": "Party",
   "category.places": "Culture & Nature",
@@ -9,5 +12,7 @@
   "view.map": "View on map",
   "view.list": "View as list",
   "search": "Search...",
-  "no.results": "Nothing found, try again."
+  "no.results": "Nothing found, try again.",
+  "now.open": "open now",
+  "now.closed": "closed now"
 }

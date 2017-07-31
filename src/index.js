@@ -17,10 +17,11 @@ import './typography.css'
 import './index.css'
 
 /* langaugage data */
+import ch from './assets/locales/ch.js'
 import en from 'react-intl/locale-data/en'
 import de from 'react-intl/locale-data/de'
 
-addLocaleData([...en, ...de])
+addLocaleData([...en, ...de, ...ch])
 
 render(
   <Provider store={store}>

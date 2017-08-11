@@ -9,6 +9,7 @@ export const USER_TYPING = 'USER_TYPING'
 export const SEARCH = 'SEARCH'
 
 export const TOGGLE_MENU = 'TOGGLE_MENU'
+export const TOGGLE_IMPRESSUM = 'TOGGLE_IMPRESSUM'
 export const SET_VIEW = 'SET_VIEW'
 export const OPEN_LOCATION = 'OPEN_LOCATION'
 
@@ -43,6 +44,11 @@ export const search = query => ({
 
 export const toggleMenu = bool => ({
   type: TOGGLE_MENU,
+  bool
+})
+
+export const toggleImpressum = bool => ({
+  type: TOGGLE_IMPRESSUM,
   bool
 })
 

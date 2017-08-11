@@ -24,8 +24,9 @@
 	transition: all 500ms cubic-bezier(0.770, 0.000, 0.175, 1.000); /* easeInOutQuart */
 }
 .Navigation ul li {
-	font-size: 1.5rem;
-	padding: 0.7rem;
+	font-size: 1.35rem;
+	vertical-align: middle;
+	list-style-type: none;
 }
 .Navigation-link {
 	display: block;
@@ -36,7 +37,7 @@
 	transition: height 500ms cubic-bezier(0.770, 0.000, 0.175, 1.000); /* easeInOutQuart */
 }
 .Navigation-link.show {
-	height: 3.3rem;
+	height: 2.75rem;
 }
 .Navigation.search ul {
 	top: 0%;
@@ -44,6 +45,12 @@
 }
 .Navigation.search ul li {
 	line-height: 1rem;
+	list-style-type: none;
+}
+.Navigation .search-link {
+	padding-top: 0.5rem;
+	padding-left: 0.25rem;
+	list-style-type: none;
 }
 .Navigation .search-link input {
 	background: none;
@@ -80,6 +87,15 @@
 .Navigation-small {
 	font-size: 0.8rem;
 	position: absolute;
+	overflow: hidden;
+	transition: opacity 0.25s;
+}
+.Navigation-small__invisible {
+	opacity: 0;
+	pointer-events: none;
+}
+.Navigation-small__hidden {
+	display: none;
 }
 .Navigation-small__top {
 	top: 0.75rem;
@@ -93,10 +109,14 @@
 .Navigation-small__left {
 	left: 0.75rem;
 }
-.Navigation-langSwitch-button {
+.Navigation-langSwitch-button, .Navigation-impressum-button {
+	display: inline;
 	background: none;
 	border: none;
 	color: white;
 	font-family: 'Landnama';
 	padding: 0 0.75rem 0 0;
+}
+.Navigation-impressum-button {
+	padding: 0;
 }

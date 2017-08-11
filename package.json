@@ -12,6 +12,7 @@
     "mapbox-gl": "^0.37.0",
     "normalize.css": "^7.0.0",
     "query-string": "^5.0.0",
+    "raven-js": "^3.17.0",
     "react": "^15.6.1",
     "react-document-title": "^2.0.3",
     "react-dom": "^15.6.1",

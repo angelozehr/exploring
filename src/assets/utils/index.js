@@ -47,3 +47,15 @@ export const sequence = (max, step = 1) => {
   }
   return array
 }
+
+export const getBaseUrl = url => {
+  if (url.indexOf('/') < 0) return
+  const pathArray = url.split( '/' )
+  return pathArray[2]
+}
+
+export const consolelog = message => {
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(message)
+  }
+}

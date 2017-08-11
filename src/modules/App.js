@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import Helmet from 'react-helmet'
+import { debounce } from 'throttle-debounce';
 
 /* components */
 import Start from '../components/Start/Start'
@@ -16,6 +17,10 @@ import LocationMap from '../components/LocationMap/LocationMap'
 import Location from '../components/Location/Location'
 import Footer from '../components/Footer/Footer'
 import Oops from '../components/Oops/Oops'
+import Impressum from '../components/Impressum/Impressum'
+
+/* resouces */
+import {consolelog} from '../assets/utils'
 
 /* styles */
 import './App.css'
@@ -23,29 +28,35 @@ import './App.css'
 class App extends PureComponent {
   constructor (props) {
     super(props)
-    console.log('[LOG]: App gets constructed...')
+    consolelog('[LOG]: App gets constructed...')
     this.state = {
       hideStart: false,
       unmountStart: false
     }
-
+    this.scrollPosition = 0
     this.availableFilters = ['all' ,'eatdrink' ,'party' ,'places' ,'shopping' ,'saved']
     this.getTitle = this.getTitle.bind(this)
     this.readURL = this.readURL.bind(this)
     this.writeURL = this.writeURL.bind(this)
+    this.handleScroll = this.handleScroll.bind(this)
     this.getFilteredLocations = this.getFilteredLocations.bind(this)
   }
 
   componentWillMount () {
-    console.log('[LOG]: App will mount...')
+    consolelog('[LOG]: App will mount...')
     this.props.fetchLocationData()
+    this.context.router.history.action = 'PUSH'
     this.readURL()
     setTimeout(() => {this.setState(({hideStart: true}))}, 1500)
     setTimeout(() => {this.setState(({unmountStart: true}))}, 2500)
   }
 
+  componentDidMount () {
+    window.addEventListener('scroll', debounce(100, () => { this.handleScroll() }));
+  }
+
   componentWillReceiveProps (nextProps) {
-    console.log('[LOG]: App will receive props...')
+    consolelog('[LOG]: App will receive props...')
     /* if user clicked back button: Read in url */
     if (this.context.router.history.action === 'POP') {
       this.readURL(nextProps)
@@ -54,7 +65,14 @@ class App extends PureComponent {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.view === 'location' && this.props.view === 'list') {
+      setTimeout(() => {window.scrollTo(0, this.scrollPosition)}, 50)
+    }
+  }
+
   readURL (props = this.props) {
+    consolelog('[LOG]: App reads URL...')
     const {
       openLocation,
       search,
@@ -67,11 +85,15 @@ class App extends PureComponent {
       filter
     } = props.match.params
 
+    if (view === props.view && filter === props.filter) {
+      return true
+    }
+
     /* url incomplete */
-    if (view === undefined) {
+    if (view === undefined || view === '') {
       view = 'list'
     }
-    if (filter === undefined) {
+    if (filter === undefined || filter === '') {
       filter = 'all'
     }
     /* location */
@@ -93,6 +115,7 @@ class App extends PureComponent {
   }
 
   writeURL (props = this.props) {
+    consolelog('[LOG]: App writes URL...')
     const {
       view,
       query,
@@ -124,7 +147,7 @@ class App extends PureComponent {
   }
 
   getFilteredLocations () {
-    console.log('[LOG]: Filter Locations...')
+    consolelog('[LOG]: Filter Locations...')
     const {
       locationsLoading,
       locations,
@@ -151,17 +174,38 @@ class App extends PureComponent {
       }
     }
 
+
     if (query !== '') {
       /* query */
       return locations.filter(location => {
-        if(location.slug === query) return true
-        if(location.name.toLowerCase().indexOf(query.toLowerCase()) >= 0) return true
-        if(location[`tags_${locale}`].toLowerCase().indexOf(query.toLowerCase()) >= 0) return true
+        /* slug */
+        if (location.slug === query) return true
+
+        /* name */
+        if (location.name.toLowerCase().indexOf(query.toLowerCase()) >= 0) return true
+
+        /* tags */
+        if (location[`tags_${locale}`] !== null) {
+          if (location[`tags_${locale}`].toLowerCase().indexOf(query.toLowerCase()) >= 0) return true
+        }
+
+        /* description */
+        if (location[`description_${locale}`] !== null) {
+          if (location[`description_${locale}`].toLowerCase().indexOf(query.toLowerCase()) >= 0) return true
+        }
+
+        /* nothing found */
         return false
       })
 
     }
     return locations
+  }
+
+  handleScroll (event) {
+    if (this.props.view === 'list') {
+      this.scrollPosition = document.body.scrollTop
+    }
   }
 
   getTitle () {
@@ -182,7 +226,7 @@ class App extends PureComponent {
   }
 
   render () {
-    console.log('[LOG]: App renders...')
+    consolelog('[LOG]: App renders...')
     const {
       locale,
       bookmarks,
@@ -194,7 +238,7 @@ class App extends PureComponent {
       search,
       query,
       userTyping,
-      showRestults,
+      showResults,
       locations,
       singleLocation,
       toggleBookmark,
@@ -229,30 +273,36 @@ class App extends PureComponent {
         {!this.state.unmountStart && <Start hidden={this.state.hideStart} />}
         <Helmet>
           <title>{`${this.context.intl.messages['AppName']} ${this.getTitle()}`}</title>
-          <meta property="og:url" content={window.location.href} />
-          <meta property="og:image" content="http://www.mysite.com/articleimage.jpg" />
-          <meta property="og:site_name" content={this.context.intl.messages['AppName']} />
           <meta name="description" content={`${this.context.intl.messages['description']}`} />
-          <meta property="og:description" content={`${this.context.intl.messages['description']}`} />
         </Helmet>
-        <Header title={this.getTitle()}>
+        <Header
+          title={this.getTitle()}
+          handleMenuClick={this.props.toggleMenu}
+        >
           <Menu
+            showMenu={showMenu}
             searchOpen={searchOpen}
-            handleClick={this.props.toggleMenu}>
+            handleMenuClick={this.props.toggleMenu}
+          >
             <Navigation
               view={view}
               show={showMenu}
               handleSearchIconClick={() => { userTyping(true) }}
               handleLangSwitchClick={this.props.updateIntl}
+              handleImpressumClick={this.props.toggleImpressum}
               searchOpen={searchOpen}
               search={search}
               query={query}
-              showRestults={showRestults}
-              handleClick={this.props.setCategory}
+              showResults={showResults}
+              handleLinkClick={this.props.setCategory}
               options={this.availableFilters}
             />
           </Menu>
         </Header>
+        <Impressum
+          toggleImpressum={this.props.toggleImpressum}
+          showImpressum={this.props.showImpressum}
+        />
         <main>
           <Switch>
             <Route

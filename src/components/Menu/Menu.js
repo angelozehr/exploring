@@ -4,17 +4,22 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+/* resouces */
+import {consolelog} from '../../assets/utils'
+
 /* styles */
 import './Menu.css'
 
 class Menu extends PureComponent {
 
   render() {
-    console.log('[LOG]: Menu renders...')
+    consolelog('[LOG]: Menu renders...')
 
     return (
-      <div className={classnames('Menu', {'menu_state_open': (this.props.showMenu || this.props.searchOpen)})}>
-        <div className='menu__icon' onClick={this.props.handleClick}>
+      <div
+        className={classnames('Menu', {'menu_state_open': (this.props.showMenu || this.props.searchOpen)})}
+       >
+        <div className='menu__icon' onClick={this.props.handleMenuClick}>
   	      <span></span>
   	      <span></span>
   	      <span></span>
@@ -34,7 +39,7 @@ Menu.defaultProps = {
 Menu.propTypes = {
   showMenu: PropTypes.bool,
   searchOpen: PropTypes.bool,
-  handleClick: PropTypes.func.isRequired
+  handleMenuClick: PropTypes.func.isRequired
 }
 
 export default Menu

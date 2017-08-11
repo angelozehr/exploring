@@ -12,6 +12,7 @@ import Oops from '../Oops/Oops'
 
 /* resources */
 import mapIcon from '../../assets/icons/map.svg'
+import {consolelog} from '../../assets/utils'
 
 /* styles */
 import './List.css'
@@ -29,11 +30,11 @@ class List extends PureComponent {
   }
 
   handleTouchStart (index) {
-    console.log('[LOG]: List touched...')
+    consolelog('[LOG]: List touched...')
   }
 
   handleTouchEnd () {
-    console.log('[LOG]: List touch ended...')
+    consolelog('[LOG]: List touch ended...')
   }
 
   getDistance (longLat) {
@@ -51,7 +52,7 @@ class List extends PureComponent {
   }
 
   render () {
-    console.log('[LOG]: List renders...')
+    consolelog('[LOG]: List renders...')
 
     const {
       category,
@@ -75,7 +76,7 @@ class List extends PureComponent {
             >
               <figure
                 className='List-location-image'
-                style={{backgroundImage: `url(${process.env.PUBLIC_URL}/images/${location.slug}/1.jpg)`}}
+                style={{backgroundImage: `url(${process.env.PUBLIC_URL}/images/${location.slug}/1_${location.slug}.jpg)`}}
               >
                 <div className='List-location-overlay'>
                   <h3>{location.name}</h3>

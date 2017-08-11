@@ -1,8 +1,8 @@
 {
   "AppName.short": "Wohi?",
   "AppName": "Wohi St.Galle?",
-  "description": "Du hesch gmeint St.Galle heg nöd so viel z'büte? Du hesch di tosche!",
-  "Impressum": "Impressum",
+  "claim": "En St.Galler Stadtfüehrer",
+  "description": "Lo di vo dim Handy zu de versteckte Schätz Schätz vo St.Galle füehre. En digitale Guide – kuratiert vo St.Galler",
   "category.all": "Alli Ort",
   "category.eatdrink": "Ässä & Trinkä",
   "category.party": "Fiire",
@@ -14,5 +14,11 @@
   "search": "Sueche...",
   "no.results": "Kei Treffer, probier's nomol.",
   "now.open": "Het grad offe",
-  "now.closed": "Isch grad zue"
+  "now.closed": "Isch grad zue",
+  "price": "Priisniveau",
+  "addBookmarks": "Speichere en Ort i dini Lieblingsort. Du muesch defür nur ufs Herzli tippe, wennd eis gsehsch! Du findschen nachher do wieder!",
+  "impressum": "Wohi.sg isch en Service vo de Anna Zimmermann und vom Angelo Zehr. De digitali Stadtfüerer hät nöd de Aspruch vollschtändig zsi, sondern isch lediglich e Uswahl vo Ort wo me oft und gern higönd und wo mir finded dass si St.Galle bericheret.",
+  "impressum_copyright": "Mir bedanked üs bim Oliver Kerrison für di bericherndi und hilfrichi Mitarbeit. D’Fotis sind, wenn nöd andersch ahgeh, vo de Autorin oder em Autor gmacht worde oder sind zur Verfüegig gschtellt worde. Mir danked de Fotografinne und Fotografe für folgendi Bilder:",
+  "impressum_sendin": "Bi Froge oder Verbesserigsvorschläg schicket üs doch e Nochricht:",
+  "impressum_mail": "az@wohi.sg"
 }

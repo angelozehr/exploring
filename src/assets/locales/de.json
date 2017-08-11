@@ -1,8 +1,8 @@
 {
   "AppName.short": "Wohin?",
   "AppName": "Wohin St.Gallen?",
-  "description": "Finde alle coolen Orte der Stadt St.Gallen mit diesem Smartphone-Stadtführer.",
-  "Impressum": "Impressum",
+  "claim": "Ein St.Galler Stadtführer",
+  "description": "Lass dich von deinem Handy zu den versteckten Schätzen St.Gallens führen. Ein digitaler Guide – kuratiert von St.Gallern",
   "category.all": "Alle Orte",
   "category.eatdrink": "Essen & Trinken",
   "category.party": "Ausgehen",
@@ -14,5 +14,11 @@
   "search": "Suchen...",
   "no.results": "Kein Treffer, versuch's nochmal.",
   "now.open": "Jetzt geöffnet",
-  "now.closed": "Jetzt geöffnet"
+  "now.closed": "Jetzt geöffnet",
+  "price": "Preisniveau",
+  "addBookmarks": "Speichere einen Ort ab, indem du auf das Herz tippst, wenn du eins siehts. Du findest ihn danach hier wieder.",
+  "impressum": "Wohin.sg ist ein Dienst von Anna Zimmermann und Angelo Zehr. Der digitale Stadtführer hat nicht den Anspruch vollständig zu sein, sondern ist lediglich eine Auswahl von Orten an denen wir uns oft und gerne aufhalten und wie wir finden St.Gallen bereichern.",
+  "impressum_copyright": "Wir danken Oliver Kerrison für die bereichernde und hilfreiche Mitarbeit.<br />Die Fotos wurden, wenn nichts anderes angegeben ist, von der Autorin oder vom Autor gemacht oder wurden zur Verfügung gestellt. Wir danken hierbei den Fotografinnen und Fotografen für folgende Bilder:",
+  "impressum_sendin": "Bei Fragen oder Verbesserungsvorschlägen schickt uns doch eine Nachricht:",
+  "impressum_mail": "az@wohin.sg"
 }

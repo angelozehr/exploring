@@ -10,7 +10,7 @@ class Header extends PureComponent {
   render () {
     return (
       <div className='Header'>
-        <h1>
+        <h1 onClick={this.props.handleMenuClick}>
           {this.props.title}
         </h1>
         {this.props.children}
@@ -24,7 +24,8 @@ Header.defaultProps = {
 }
 
 Header.propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
+  handleMenuClick: PropTypes.func.isRequired
 }
 
 export default Header

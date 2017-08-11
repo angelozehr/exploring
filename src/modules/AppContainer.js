@@ -10,12 +10,20 @@ import { updateIntl } from 'react-intl-redux'
 /* components */
 import App from './App'
 
+/* resouces */
+import {consolelog} from '../assets/utils'
+
 /* actions */
 import * as actions from '../actions'
 
 class AppContainer extends PureComponent {
+
+  componentDidMount() {
+    document.body.classList.remove('loading')
+  }
+
   render () {
-    console.log('[LOG]: AppContainer renders...')
+    consolelog('[LOG]: AppContainer renders...')
 
     return (
       <Router>
@@ -49,7 +57,8 @@ const mapStateToProps = state => {
     bookmarks: state.bookmarks.bookmarks,
     query: state.app.query,
     searchOpen: state.app.searchOpen,
-    showRestults: state.app.showRestults,
+    showResults: state.app.showResults,
+    showImpressum: state.app.showImpressum,
     singleLocation: state.app.singleLocation,
     locale: state.intl.locale,
     messages: state.intl.messages,

@@ -2,7 +2,7 @@
 	background-color: black;
   background-position: center center;
   background-repeat: no-repeat;
-  background-image: url('../../assets/images/bratwurst.gif');
+  background-image: url('../../assets/icons/bratwurst.gif');
   z-index: 99;
   position: fixed;
   opacity: 1;
@@ -26,5 +26,18 @@
   background-color: black;
   color: white;
   font-size: 2.5rem;
-  padding: 0.5rem;
+  padding: 0.75rem;
+  height: 4.5rem;
+  width: 100%;
+  text-align: center;
+}
+
+.Start-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  height: 4rem;
+  width: auto;
+  vertical-align: middle;
 }

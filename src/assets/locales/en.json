@@ -1,8 +1,8 @@
 {
   "AppName.short": "Exploring",
   "AppName": "Exploring St.Gallen",
-  "description": "Your guide to Saint Gallen – check it out, it's cool. I swear.",
-  "Impressum": "Impressum",
+  "claim": "A guide to St.Gallen",
+  "description": "Let your smartphone guide you to the hidden treasures of St.Gallen. A digital guide – curated by locals",
   "category.all": "All places",
   "category.eatdrink": "Eat & Drink",
   "category.party": "Party",
@@ -14,5 +14,11 @@
   "search": "Search...",
   "no.results": "Nothing found, try again.",
   "now.open": "open now",
-  "now.closed": "closed now"
+  "now.closed": "closed now",
+  "price": "Price level",
+  "addBookmarks": "Save a location by tapping the heart icon. As soon as you've added a place to your favourites, you'll find it here.",
+  "impressum": "Exploring.sg is a service of Anna Zimmermann and Angelo Zehr. This digital city guide is not exhaustive but consists merely of a selection of places that we like and consider to be valuable for the City of St.Gallen.",
+  "impressum_copyright": "Thanks to Oliver Kerrison for his support and help throughout the project. The pictures, if not indicated differently, are taken by the author or were provided. Thanks to the photographers of the following pictures:",
+  "impressum_sendin": "If you have any questions or remarks, send us a message:",
+  "impressum_mail": "az@exploring.sg"
 }

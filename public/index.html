@@ -1,50 +1,78 @@
-<!doctype html>
-<html lang="en">
+<?php
+switch ($_SERVER['HTTP_HOST']) {
+  case 'wohi.sg': $lang1 = 'de'; $lang2 = 'CH'; break;
+  case 'wohin.sg': $lang1 = 'de'; $lang2 = 'DE'; break;
+  default: $lang1 = 'en'; $lang2 = 'US'; break;
+}
+$jsondata = file_get_contents("./data/locales/" . strtolower($lang2) . ".json");
+$messages = json_decode($jsondata);
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $lang1 . '-' . $lang2 ?>">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/icons/favicon.ico">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/icons/favicon.ico" type="image/x-icon"/>
-    <link rel="apple-touch-icon" sizes="57x57" href="%PUBLIC_URL%/icons/apple-touch-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="%PUBLIC_URL%/icons/apple-touch-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="%PUBLIC_URL%/icons/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="%PUBLIC_URL%/icons/apple-touch-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="%PUBLIC_URL%/icons/apple-touch-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="%PUBLIC_URL%/icons/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="%PUBLIC_URL%/icons/apple-touch-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="%PUBLIC_URL%/icons/apple-touch-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/icons/apple-touch-icon-180x180.png">
-    <link rel="icon" type="image/png" href="%PUBLIC_URL%/icons/favicon-16x16.png" sizes="16x16">
-    <link rel="icon" type="image/png" href="%PUBLIC_URL%/icons/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="%PUBLIC_URL%/icons/favicon-96x96.png" sizes="96x96">
-    <link rel="icon" type="image/png" href="%PUBLIC_URL%/icons/android-chrome-192x192.png" sizes="192x192">
-    <meta name="msapplication-square70x70logo" content="%PUBLIC_URL%/icons/smalltile.png"/>
-    <meta name="msapplication-square150x150logo" content="%PUBLIC_URL%/icons/mediumtile.png"/>
-    <meta name="msapplication-wide310x150logo" content="%PUBLIC_URL%/icons/widetile.png"/>
-    <meta name="msapplication-square310x310logo" content="%PUBLIC_URL%/icons/largetile.png"/>
-
-    <!--
-      Notice the use of %PUBLIC_URL% in the tag above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>Exploring St.Gallen</title>
+    <link rel="shortcut icon" href="https://az.sg/ogimage/favicon.ico">
+    <link rel="shortcut icon" href="https://az.sg/ogimage/favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon" sizes="57x57" href="https://az.sg/ogimage/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://az.sg/ogimage/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://az.sg/ogimage/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://az.sg/ogimage/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://az.sg/ogimage/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://az.sg/ogimage/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://az.sg/ogimage/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://az.sg/ogimage/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://az.sg/ogimage/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="https://az.sg/ogimage/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="https://az.sg/ogimage/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://az.sg/ogimage/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="https://az.sg/ogimage/android-chrome-192x192.png" sizes="192x192">
+    <meta name="msapplication-square70x70logo" content="https://az.sg/ogimage/smalltile.png"/>
+    <meta name="msapplication-square150x150logo" content="https://az.sg/ogimage/mediumtile.png"/>
+    <meta name="msapplication-wide310x150logo" content="https://az.sg/ogimage/widetile.png"/>
+    <meta name="msapplication-square310x310logo" content="https://az.sg/ogimage/largetile.png"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="alternate" href="https://wohi.sg/" hreflang="de-CH" />
+    <link rel="alternate" href="https://wohin.sg/" hreflang="de-DE" />
+    <link rel="alternate" href="https://exploring.sg/" hreflang="en-US" />
+    <meta property="og:url" content="https://<?php echo $_SERVER['HTTP_HOST'] ?>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="<?php echo $messages->AppName ?>" />
+    <meta property="og:description" content="<?php echo $messages->description ?>" />
+    <meta property="og:image" content="http://az.sg/ogimage/ogimage_<?php echo strtolower($lang2) ?>.png" />
+    <meta property="og:image:width" content="1500" />
+    <meta property="og:image:height" content="750" />
+    <title><?php echo $messages->AppName ?></title>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en,Intl.~locale.de"></script>
+    <style type="text/css">
+      body, html {
+        width: 100%;
+        height: 100%;
+      }
+      body.loading {
+        background-color: #000;
+        background-image: url(https://az.sg/ogimage/bratwurst.gif);
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+    </style>
   </head>
-  <body>
+  <body class="loading">
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start`.
-      To create a production bundle, use `npm run build`.
-    -->
   </body>
+  <!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://az.sg/analytics/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '4']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Piwik Code -->
 </html>

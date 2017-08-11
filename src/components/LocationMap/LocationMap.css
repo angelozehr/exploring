@@ -54,8 +54,8 @@
   width: 14px;
   height: 14px;
   position: relative;
-  top: 31px;
-  left: 31px;
+  top: -7px;
+  left: -7px;
   background: rgba(5, 124, 255, 1);
   border: 2px solid #FFF;
   border-radius: 50%;
@@ -66,7 +66,8 @@
   width: 80px;
   height: 80px;
   position: absolute;
-  top: 0;
+  top: -38px;
+  left: -38px;
   display: block;
   background: rgba(5, 124, 255, 0.4);
   border-radius: 50%;

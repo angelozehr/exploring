@@ -29,7 +29,7 @@ class LocationMap extends PureComponent {
     this.state = {
       isInitialized: false
     }
-
+    this.markers = []
     this.initMap = this.initMap.bind(this)
     this.addGeoJsonLayer = this.addGeoJsonLayer.bind(this)
     this.controlGeoLocation = this.controlGeoLocation.bind(this)
@@ -75,13 +75,11 @@ class LocationMap extends PureComponent {
   addGeoJsonLayer() {
 
     if( this.state.isInitialized ) {
-      this.state.markers.map((marker, index) => {
+      this.markers.map((marker, index) => {
         marker._element.remove()
         return true
       })
     }
-
-    let markers = this.state.markers || []
 
     this.props.locations.map((loc, index) => {
 
@@ -113,15 +111,14 @@ class LocationMap extends PureComponent {
         marker.togglePopup()
       }
 
-      markers.push(marker)
+      this.markers.push(marker)
       return true
     })
 
     this.controlGeoLocation()
 
     this.setState({
-      isInitialized: true,
-      markers: markers
+      isInitialized: true
     })
   }
 
@@ -130,7 +127,8 @@ class LocationMap extends PureComponent {
       this.geolocate = new MapboxGL.GeolocateControl({
         positionOptions: {
           enableHighAccuracy: true
-        }
+        },
+        trackUserLocation: true
       })
       this.map.addControl(this.geolocate, 'top-left')
       this.geolocate.on('geolocate', this.positionUser)
@@ -151,6 +149,8 @@ class LocationMap extends PureComponent {
       effect.className = 'LocationMap-user-pin-effect'
       el.appendChild(pin)
       el.appendChild(effect)
+      el.style.width = '1px'
+      el.style.height = '1px'
 
       const user = new MapboxGL.Marker(el)
         .setLngLat([data.coords.longitude, data.coords.latitude])

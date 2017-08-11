@@ -10,6 +10,7 @@ import { LOCATIONS_LOADING,
   USER_TYPING,
   SEARCH,
   TOGGLE_MENU,
+  TOGGLE_IMPRESSUM,
   SET_VIEW,
   OPEN_LOCATION,
   TOGGLE_BOOKMARK,
@@ -46,7 +47,8 @@ const appReducer = (state = {
   category: 'all',
   showMenu: false,
   searchOpen: false,
-  showRestults: false,
+  showResults: false,
+  showImpressum: false,
   query: '',
   view: 'list'
 }, action) => {
@@ -57,7 +59,7 @@ const appReducer = (state = {
         category: action.category,
         showMenu: false,
         query: '',
-        showRestults: false,
+        showResults: false,
         searchOpen: false,
         view: state.view === 'location' ? 'list' : state.view
       }
@@ -70,9 +72,10 @@ const appReducer = (state = {
       return {
         ...state,
         query: action.query,
+        view: ['list', 'map'].indexOf(state.view) > -1 ? state.view : 'list',
         showMenu: false,
         searchOpen: true,
-        showRestults: true
+        showResults: true
       }
     case TOGGLE_MENU:
       return {
@@ -80,7 +83,12 @@ const appReducer = (state = {
         showMenu: action.bool === typeof bool ? action.bool : !state.showMenu,
         searchOpen: false,
         query: '',
-        showRestults: false
+        showResults: false
+      }
+    case TOGGLE_IMPRESSUM:
+      return {
+        ...state,
+        showImpressum: action.bool === typeof bool ? action.bool : !state.showImpressum
       }
     case SET_VIEW:
       return {
@@ -93,7 +101,7 @@ const appReducer = (state = {
         view: 'location',
         singleLocation: action.slug,
         query: '',
-        showRestults: false
+        showResults: false
       }
     case POSITION_USER:
       return {

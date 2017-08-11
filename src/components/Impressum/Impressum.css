@@ -1,0 +1,55 @@
+.Impressum {
+  position: fixed;
+  height: 0;
+  width: 100%;
+  right:0;
+  bottom:0;
+  left:0;
+  background: black;
+  text-align: center;
+  z-index: 9;
+  background: black;
+  color: white;
+  overflow: hidden;
+  z-index: 13;
+  box-sizing: border-box;
+  transition: height 0.5s;
+}
+
+.Impressum__show {
+  height: 100%;
+}
+
+.Impressum-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 90%;
+  max-width: 600px;
+  height: 90%;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  text-align: center;
+  overflow-y: scroll;
+}
+@media screen and (min-height: 737px) {
+  .Impressum-text {
+    height: auto;
+  }
+}
+
+.Impressum-text span, .Impressum-email {
+  display: block;
+  padding-bottom: 1rem;
+}
+
+.Impressum-text span.Impressum-copyright-entry {
+  padding-bottom: 0;
+}
+
+.Impressum-menu {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 1rem;
+}

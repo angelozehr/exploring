@@ -11,25 +11,44 @@
   z-index: 9;
 }
 
-.Oops .error {
+.Oops-error, .Oops-howto {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
   width: 50%;
+  max-width: 500px;
+  color: white;
 }
 
-.Oops .error-title {
+.Oops-error-title {
   font-size: 2rem;
   color: white;
 }
 
-.Oops .error-message {
+.Oops-error-message {
   font-size: 1rem;
   color: white;
 }
 
-.Oops .error-icon {
+.Oops-error-icon {
   width: 100%;
   height: auto;
+}
+
+.Oops-heart {
+  display: inline-block;
+  padding-bottom: 2rem;
+  width: 2.8rem;
+  height: 2.4rem;
+  animation: heartBeat 3s infinite;
+  animation-fill-mode: both;
+}
+
+@keyframes heartBeat {
+  30% { transform: scale(1); }
+  40% { transform: scale(0.8); }
+  50% { transform: scale(1); }
+  60% { transform: scale(0.8); }
+  70% { transform: scale(1); }
 }

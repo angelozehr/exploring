@@ -9,6 +9,7 @@ import withScriptjs from 'react-google-maps/lib/async/withScriptjs'
 /* resources */
 import markerIcon from '../../assets/icons/marker.svg'
 import listIcon from '../../assets/icons/list.svg'
+import {consolelog} from '../../assets/utils'
 
 /* styles */
 import './LocationMap.css'
@@ -80,7 +81,7 @@ class LocationMap extends PureComponent {
   }
 
   render () {
-    console.log('[LOG]: LocationMap renders...')
+    consolelog('[LOG]: LocationMap renders...')
 
     return (
       <div className='LocationMap' style={{height: window.innerHeight}}>

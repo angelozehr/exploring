@@ -1,16 +1,81 @@
 {
-  "updated": "2017-07-31T12:51:01.048Z",
+  "updated": "2017-08-11T14:37:07.183Z",
   "title": "Copyright",
   "data": [
     {
+      "Ort": "Kaffeehaus ",
+      "Objekt": "Bild 1",
+      "Rechtebesitzer": "Urs Anderegg"
+    },
+    {
+      "Ort": "Kaffeehaus ",
+      "Objekt": "Bild 2",
+      "Rechtebesitzer": "Stephan Bösch"
+    },
+    {
+      "Ort": "KuGl",
+      "Objekt": "alle Bilder",
+      "Rechtebesitzer": "Angelina Wegmann"
+    },
+    {
+      "Ort": "Kunsthalle ",
+      "Objekt": "Bild 1",
+      "Rechtebesitzer": "Sonia Kacem"
+    },
+    {
+      "Ort": "Kunsthalle ",
+      "Objekt": "Bild 2",
+      "Rechtebesitzer": "Nora Steiner "
+    },
+    {
+      "Ort": "Kunsthalle ",
+      "Objekt": "Bild 3",
+      "Rechtebesitzer": "Yuri Pattison"
+    },
+    {
+      "Ort": "Kunstmuseum ",
+      "Objekt": "Bild 1",
+      "Rechtebesitzer": "Sebastian Stadler"
+    },
+    {
+      "Ort": "Moho",
+      "Objekt": "alle Bilder",
+      "Rechtebesitzer": "Tobias Siebrecht"
+    },
+    {
+      "Ort": "Naturmuseum",
+      "Objekt": "alle Bilder",
+      "Rechtebesitzer": "Stadt St.Gallen"
+    },
+    {
       "Ort": "Palace",
-      "Objekt": null,
+      "Objekt": "alle Bilder",
       "Rechtebesitzer": "Michael Bodenmann"
     },
     {
-      "Ort": "Völkerkundemuseum",
-      "Objekt": null,
-      "Rechtebesitzer": null
+      "Ort": "Perron Nord ",
+      "Objekt": "alle Bilder",
+      "Rechtebesitzer": "Claudio Baeggli"
+    },
+    {
+      "Ort": "Stadttheater ",
+      "Objekt": "Bild 1",
+      "Rechtebesitzer": "Tine Edel"
+    },
+    {
+      "Ort": "Textilmuseum ",
+      "Objekt": "Bild 1",
+      "Rechtebesitzer": "Tobias Siebrecht"
+    },
+    {
+      "Ort": "Textilmuseum ",
+      "Objekt": "Bild 2",
+      "Rechtebesitzer": "Jürg Zuercher"
+    },
+    {
+      "Ort": "Viereinhalb ",
+      "Objekt": "Bild 1",
+      "Rechtebesitzer": "Ladina Bischof"
     }
   ]
 }

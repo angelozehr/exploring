@@ -21,7 +21,10 @@ class Navigation extends PureComponent {
   render() {
     let {
       view,
-      query
+      query,
+      show,
+      searchOpen,
+      showResults
     } = this.props
 
     let {
@@ -35,14 +38,14 @@ class Navigation extends PureComponent {
     if (view === 'location') view = 'list'
     
     return (
-      <nav className={classnames('Navigation', {show: this.props.show, search: this.props.searchOpen, results: this.props.showRestults})}>
+      <nav className={classnames('Navigation', {show: show, search: searchOpen, results: showResults})}>
         <ul>
           {this.props.options.map( (entry, index) => (
             <Link
               to={`/${view}/${entry}`}
               key={`nav-${index}`}
-              className={classnames('Navigation-link', {'show': !this.props.searchOpen})}
-              onClick={() => this.props.handleClick(entry)}>
+              className={classnames('Navigation-link', {'show': !searchOpen})}
+              onClick={() => this.props.handleLinkClick(entry)}>
               <li>
                 <FormattedMessage id={`category.${entry}`} />
               </li>
@@ -53,7 +56,7 @@ class Navigation extends PureComponent {
               <img src={searchIcon} alt='Search' />
               <input
                 autoFocus
-                className={classnames({'show': this.props.searchOpen})}
+                className={classnames({'show': searchOpen})}
                 ref={input => this.input = input}
                 name='search'
                 placeholder={placeholder}
@@ -62,13 +65,18 @@ class Navigation extends PureComponent {
             </li>
           </a>
         </ul>
-        <small className='Navigation-small Navigation-small__top Navigation-small__left'>
+        <small className={classnames('Navigation-small Navigation-small__top Navigation-small__left', {'Navigation-small__invisible': searchOpen})}>
           {messages['AppName.short']}
         </small>
-        <small className='Navigation-small Navigation-small__bottom Navigation-small__right'>
-          {messages['Impressum']}
+        <small className={classnames('Navigation-small Navigation-small__bottom Navigation-small__right', {'Navigation-small__hidden': showResults})}>
+          <button
+            className='Navigation-impressum-button'
+            onClick={() => this.props.handleImpressumClick(true)}
+          >
+            Impressum
+          </button>
         </small>
-        <small className='Navigation-small Navigation-small__bottom Navigation-small__left'>
+        <small className={classnames('Navigation-small Navigation-small__bottom Navigation-small__left', {'Navigation-small__hidden': showResults})}>
           <button
             className='Navigation-langSwitch-button'
             onClick={() => this.props.handleLangSwitchClick({locale: 'de', messages: de})}
@@ -101,7 +109,7 @@ Navigation.contextTypes = {
 Navigation.defaultProps = {
   show: false,
   searchOpen: false,
-  showRestults: false,
+  showResults: false,
   query: ''
 }
 
@@ -113,9 +121,9 @@ Navigation.propTypes = {
   searchOpen: PropTypes.bool,
   search: PropTypes.func.isRequired,
   query: PropTypes.string,
-  showRestults: PropTypes.bool,
+  showResults: PropTypes.bool,
   options: PropTypes.array.isRequired,
-  handleClick: PropTypes.func.isRequired
+  handleLinkClick: PropTypes.func.isRequired
 }
 
 export default Navigation

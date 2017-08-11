@@ -18,10 +18,26 @@ import en from '../assets/locales/en.json'
 /* read bookmarks from localstorage */
 const persistedState = loadState() || []
 
+/* read url */
+let domainLocale = undefined
+switch (window.location.origin) {
+  case 'https://exploring.sg':
+    domainLocale = 'en'
+    break
+  case 'https://wohin.sg':
+    domainLocale = 'de'
+    break
+  case 'https://wohi.sg':
+    domainLocale = 'ch'
+    break
+  default:
+    break
+}
+
 /* define locale */
 const possibleLanguage = (navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage
 const stripRegionCode = possibleLanguage.toLowerCase().split(/[_-]+/)[0]
-const locale = persistedState.userLocale || stripRegionCode || possibleLanguage || 'en'
+const locale = persistedState.userLocale || domainLocale || stripRegionCode || possibleLanguage || 'en'
 const messages = { 'en': en, 'de': de, 'ch': ch }
 
 const initialIntlState = {
@@ -38,9 +54,15 @@ const initialState = {
   bookmarks: persistedState.bookmarks
 }
 
+/* disable logger for production */
+const middleware = [thunk]
+if (process.env.NODE_ENV !== 'production') {
+  middleware.push(logger)
+}
+
 /* add thunk and logger */
 const enhancers = compose(
-  applyMiddleware(thunk, logger),
+  applyMiddleware(...middleware),
   window.devToolsExtension ? window.devToolsExtension() : f => f
 )
 

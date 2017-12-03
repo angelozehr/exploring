@@ -46,7 +46,6 @@ class Location extends PureComponent {
     } = this.props
 
     const {
-      image,
       slug,
       address,
       phone,
@@ -88,7 +87,7 @@ class Location extends PureComponent {
           className={classnames('Location-image', {'Location-image__saved': saved})}
           onClick={this.handleClick}
         >
-          {image !== null &&
+          {photos !== null &&
             <ReactSwipe
               className='Location-image-swipe'
               swipeOptions={{continuous: true, draggable: true}}

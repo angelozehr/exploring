@@ -75,8 +75,8 @@ class LocationMap extends PureComponent {
   addGeoJsonLayer() {
 
     if( this.state.isInitialized ) {
-      this.markers.map((marker, index) => {
-        marker._element.remove()
+      this.markers.map(marker => {
+        marker.remove()
         return true
       })
     }

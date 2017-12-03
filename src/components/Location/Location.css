@@ -36,15 +36,13 @@
   left: auto;
   right: 10px;
 }
-@media screen and (max-width: 768px) {
-  .Location-image-swipe::before {
-    animation: disappearLeft 1.5s ease-in-out 3s forwards;
-    animation-fill-mode: forwards;
-  }
-  .Location-image-swipe::after {
-    animation: disappearRight 1.5s ease-in-out 3s forwards;
-    animation-fill-mode: forwards;
-  }
+.Location-image-swipe::before {
+  animation: disappearLeft 1.5s ease-in-out 3s forwards;
+  animation-fill-mode: forwards;
+}
+.Location-image-swipe::after {
+  animation: disappearRight 1.5s ease-in-out 3s forwards;
+  animation-fill-mode: forwards;
 }
 @keyframes disappearLeft {
   0%   { left: 10px; }
@@ -52,8 +50,6 @@
   20%  { left: 10px; }
   30%  { left: 20px; }
   40%  { left: 10px; }
-  80%  { left: 10px; }
-  100% { left: -20px; }
 }
 @keyframes disappearRight {
   0%   { right: 10px; }
@@ -61,8 +57,6 @@
   20%  { right: 10px; }
   30%  { right: 20px; }
   40%  { right: 10px; }
-  80%  { right: 10px; }
-  100% { right: -20px; }
 }
 .Location-description p {
 	text-align: center;
